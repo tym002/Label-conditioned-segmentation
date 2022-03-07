@@ -1,4 +1,4 @@
-# Label conditioned segmentation
+# Label conditioned segmentation (LCS)
 
 MIDL 2022 submission
 
