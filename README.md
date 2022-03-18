@@ -1,6 +1,6 @@
 ## Label conditioned segmentation (LCS)
 
-Code for our MIDL 2022 paper: Label conditioned segmentation
+Code for our MIDL 2022 paper: *Label conditioned segmentation*
 
 An LCS model outputs a single-channel segmentation map regardless of how many classes are used for training. The output class is conditioned on an additional input provided to the model.
 
