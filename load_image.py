@@ -35,24 +35,16 @@ def class_map(y, n_class, classes = None):
     print('Creating Final Mask ... ...')
     return labels
         
-def load_train_data(model, n_class, label, classes = None, y_index = 49, test_index = 3):
+def load_train_data(model, n_class, label, classes = None, test_index = 3):
     '''
     load the training data and ground truth data  
     '''
 
-    x = np.load('...')
-    if y_index == 95:
-        y = np.load('...')
-    elif y_index == 49:
-        y = np.load('...')
-    elif y_index == 29:
-        y = np.load('...')
-    elif y_index == 30:
-        y = np.load('...')
+    x = np.load('./x_data.npy')
+    y = np.load('./y_data.npy')
     print('Loading Data Done...') 
 
-    print('y_index:',y_index)
-    print('test_index:',test_index)
+
     if model == 'conv' and label == 'multi':
         print('Converting label maps')
         y = class_map(y, n_class, classes)
@@ -78,9 +70,7 @@ def load_train_data(model, n_class, label, classes = None, y_index = 49, test_in
     return x_train,y_train,x_test,y_test    
 
 def load_test_data():
-    '''
-    load the training data and ground truth centerline  
-    '''
+
     x = np.load('...')
     y = np.load('...')  
     imgs_train = x[21:]

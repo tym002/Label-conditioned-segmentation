@@ -24,7 +24,7 @@ def three_way(gen):
     for x,y in gen:
         yield x,[y,y]
         
-def TrainandValidate(folder_name, file_name, classes = None, n_class=4, b_size = 4, model_type = 'conv', label = 'single', rand_atlas = False, combine_label = False, val_inx=2, image_size = (160,208,160,1), y_index = 49, test_index = 3):  
+def TrainandValidate(folder_name, file_name, classes = None, n_class=4, b_size = 4, model_type = 'conv', label = 'single', rand_atlas = False, combine_label = False, val_inx=2, image_size = (160,208,160,1), test_index = 3):  
 
     save_folder = '...' + folder_name + '/'
     weight_path = save_folder + file_name + '.hdf5'
@@ -60,7 +60,8 @@ def TrainandValidate(folder_name, file_name, classes = None, n_class=4, b_size =
                                        save_best_only=True,save_weights_only = True)
 
     
-    x_train,y_train,x_test,y_test = load_train_data(model_type, n_class, label, classes, y_index, test_index)
+    x_train,y_train,x_test,y_test = load_train_data(model_type, n_class, label, classes, test_index)
+    
     x_val, y_val = x_train[16:], y_train[16:]
     
     print('Number of x train:',x_train.shape)
@@ -89,11 +90,11 @@ def TrainandValidate(folder_name, file_name, classes = None, n_class=4, b_size =
 
     pd.DataFrame.from_dict(mtrain.history).to_csv(save_folder+'history_'+file_name+'.csv',index=False)
     
-def prediction(folder_name, file_name, classes = None, class_start = 1, n_class=4, model_type = 'conv', label = 'single', y_index = 49, test_index = 3):
+def prediction(folder_name, file_name, classes = None, class_start = 1, n_class=4, model_type = 'conv', label = 'single', test_index = 3):
 
     print('----- Loading and preprocessing test data... -----')
     print('Using GPU:',tf.test.is_gpu_available())
-    x_train,y_train,x_test,y_test = load_train_data(model_type, n_class, label, classes, y_index, test_index)
+    x_train,y_train,x_test,y_test = load_train_data(model_type, n_class, label, classes, test_index)
 
     print("input size:", x_test.shape)
 
@@ -172,23 +173,22 @@ if __name__ == '__main__':
     
     mode = 'predict'
     
-    folder_name = '...'
-    file_name = '...'
+    folder_name = 'train_results_1'
+    file_name = 'train_results_1'
 
-    # multi: multiple output channel, unet baseline
-    # single: single output channel, main method
 
     if mode == 'train':
        model = TrainandValidate(folder_name, file_name, 
-               classes = np.arange(61,80,2), 
-               n_class = 10, b_size = 2, model_type = 'conv', 
-               label = 'multi',
-               rand_atlas = False,
-               combine_label = True,
-               val_inx = 1,
+               classes = np.arange(1,2,1), # list of class labels
+               n_class = 10, # number of training classes, should match the length of 'classes'
+               b_size = 2, # batch size 
+               model_type = 'conv', 
+               label = 'multi', # multi: multiple output channel, unet baseline; single: single output channel, LCS
+               rand_atlas = False, # random atlas during training
+               combine_label = True, # label augmentation (randomly combine labels) during training 
+               val_inx = 1, # class labels used for validation 
                image_size = (160,208,160,1),
-               y_index = 49, 
-               test_index = 3)  
+               test_index = 3)  # cross_validation index, 3 means last 1/3 data used as testing. 
 
     elif mode == 'predict':
        model = prediction(folder_name, file_name, 
@@ -196,7 +196,6 @@ if __name__ == '__main__':
                             class_start = 1, 
                             n_class = 2, model_type = 'conv', 
                             label = 'single', 
-                            y_index = 30, # y label data, number of classes 
                             test_index = 3) # cross_validation index, 3 means last 1/3 data used as testing. 
     else:
         print('No Such Mode, Quit Without Running ...')
