@@ -8,7 +8,7 @@ Because the size of the model output is independent of the number of target clas
 
 Similar to many one-shot learning methods, LCS can produce previously unseen labels during inference time without further training.
 
-
+<img src="https://github.com/tym002/Label-conditioned-segmentation/blob/main/architecture_final.png" width="600">
 
 
 'python main.py' to train or test model 
