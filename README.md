@@ -20,4 +20,10 @@ Similar to many one-shot learning methods, LCS can produce previously unseen lab
 
 `python main.py` to train or test model 
 
-Input shape: (Batch, x, y, z, channel) for 3D image
+In line 174, `mode = train` or `mode = predict`
+
+Input shape: `(Batch, x, y, z, channel)` for 3D image
+
+`generator.py` contains the generator that samples random atlas label classes
+
+
