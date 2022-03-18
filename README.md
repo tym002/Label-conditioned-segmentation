@@ -18,6 +18,6 @@ Similar to many one-shot learning methods, LCS can produce previously unseen lab
 
 ## Code:
 
-'python main.py' to train or test model 
+`python main.py` to train or test model 
 
 Input shape: (Batch, x, y, z, channel) for 3D image
