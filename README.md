@@ -28,6 +28,7 @@ Input shape: `(Batch, x, y, z, channel)` for 3D image
 
 ## Citation:
 If you find our code useful, please cite our work, thank you!
+
 `@article{ma2022label,
   title={Label conditioned segmentation},
   author={Ma, Tianyu and Lee, Benjamin C and Sabuncu, Mert R},
