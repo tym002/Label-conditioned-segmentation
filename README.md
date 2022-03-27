@@ -1,6 +1,6 @@
 # Label conditioned segmentation (LCS)
 
-Code for our MIDL 2022 paper: *Label conditioned segmentation*
+Code for our MIDL 2022 paper: *Label conditioned segmentation* [https://arxiv.org/abs/2203.10091]  
 
 An LCS model outputs a single-channel segmentation map regardless of how many classes are used for training. The output class is conditioned on an additional input provided to the model.
 
@@ -25,5 +25,14 @@ In line 174, `mode = train` or `mode = predict`
 Input shape: `(Batch, x, y, z, channel)` for 3D image
 
 `generator.py` contains the generator that samples random atlas label classes
+
+## Citation:
+If you find our code useful, please cite our work, thank you!
+`@article{ma2022label,
+  title={Label conditioned segmentation},
+  author={Ma, Tianyu and Lee, Benjamin C and Sabuncu, Mert R},
+  journal={arXiv preprint arXiv:2203.10091},
+  year={2022}
+}`
 
 
