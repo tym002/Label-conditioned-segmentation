@@ -20,7 +20,9 @@ Similar to many one-shot learning methods, LCS can produce previously unseen lab
 
 `python main.py` to train or test model 
 
-In line 174, `mode = train` or `mode = predict`
+`--mode train` or `--mode test` 
+
+`--config_path` is the path to config json file that contains all model related config
 
 Input shape: `(Batch, x, y, z, channel)` for 3D image
 
